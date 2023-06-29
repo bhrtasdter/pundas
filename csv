@@ -1,0 +1,14 @@
+import pandas as pd
+
+# Загрузка данных
+data = pd.read_csv('data.csv')
+
+# Преобразование столбца с датами в формат временных рядов
+data['Date'] = pd.to_datetime(data['Date'])
+
+# Установка столбца с датами в качестве индекса
+data.set_index('Date', inplace=True)
+
+# Ресемплирование данных по неделям
+weekly_data = data.resample('W').mean()
+print(weekly_data)
